@@ -346,18 +346,25 @@ const testsFilePath = 'tests.txt';
 const tests = fs.readFileSync(testsFilePath, 'utf-8').split('\n');
 var error_count = 0;
 for (let i = 0; i < tests.length; i++) {
-    var [test_line,test_feet,test_stresses] = JSON.parse(tests[i]);
-    var [calculated_line, calculated_feet, calculated_stresses ]  = JSON.parse(GetTestResults(test_line));
+    
+    try {
+        var [test_line,test_feet,test_stresses] = JSON.parse(tests[i]);
+        var [calculated_line, calculated_feet, calculated_stresses ]  = JSON.parse(GetTestResults(test_line));
+    } catch (error) {
+        console.log(`ERROR: An error was thrown while processing test ${i}:\n  ${test_line}`);
+        console.log(`${error}`);
+        error_count++;
+    }
 
     var found_error=false;
     if (test_feet !== calculated_feet){
-        console.log(`ERROR: feet mismatch in test ${i}:\n ${test_line}`);
+        console.log(`ERROR: feet mismatch in test ${i}:\n  ${test_line}`);
         console.log(`expected:   ${test_feet}`);
         console.log(`calculated: ${calculated_feet}`);
         found_error=true;
     }
     if (test_stresses !== calculated_stresses){
-        console.log(`ERROR: stresses mismatch in test ${i}:\n ${test_line}`);
+        console.log(`ERROR: stresses mismatch in test ${i}:\n  ${test_line}`);
         console.log(`expected:   ${test_stresses}`);
         console.log(`calculated: ${calculated_stresses}`);
         found_error=true;
@@ -512,7 +519,7 @@ for (let i = 0; i < syllablized_lines.length; i++) {
 }
 
 //genereate html page
-let html = `<html><head>
+let html = `<html lang="en"><head><meta charset="utf-8">
 <style>
 img { vertical-align:top; }
 .line {
@@ -527,9 +534,10 @@ body {
 </head><body>\n`;
 for (let i = 0; i < syllablized_lines.length; i++) {
     var line_number = starting_line_number + i;
+    var line = lines[i];
 
     let filename = `svg/${i}.svg`;
-    html += `<span class="line">${line_number}:</span> <img src="${filename}" />\n`;
+    html += `<span class="line">${line_number}:</span> <img alt="${line}" src="${filename}"  />\n`;
     html += "<br/>\n";
 }
 html += "</body></html>";

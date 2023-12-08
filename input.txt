@@ -4,7 +4,7 @@ for(s ig)nā-ra de-dit, // sed sae-va Cu-pī-di-ni(s ī)ra,
 Dē-li-u(s hunc) nū-per, // vic-tā ser-pen-te su-per-bus,
 vī-de-ra(t ad)duc-tō flec-ten-tem cor-nu-a ner-vō,
 "Quid"-que "ti-bī, las-cī-ve pu-er, // cum for-ti-bu(s ar)mīs?"
-dīx-e-ra(t; "Is)ta de-cent u-me-rōs ges-tā-mi-na nos-trōs,
+dīx-e-ra(t; // "Is)ta de-cent u-me-rōs ges-tā-mi-na nos-trōs,
 quī da-re cer-ta fe-rae, da-re vul-ne-ra pos-su-mu(s hos)ti,
 quī mo-do pes-ti-fe-rō tot iū-ge-ra ven-tre pre-men-tem,
 strā-vi-mu(s in)nu-me-rīs tu-mi-dum Pȳ-thō-na sa-git-tīs.
