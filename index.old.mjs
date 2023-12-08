@@ -75,34 +75,6 @@ function syllable_long(syllable) {
     
     return false;
 }
-
-function first_part_has_vowel(syllable) {
-    for (let i=0;i<syllable.length;i++) {
-        var c = syllable[i];
-        if (vowels.includes(c)) {
-            return true;
-        }
-        if (c === " " ){
-            return false;
-        }
-    }
-    return false;
-}
-
-function first_part_grab(syllable) {
-    var result="";
-    for (let i=0;i<syllable.length;i++) {
-        var c = syllable[i];
-       
-        if (c === " " ){
-            return result;
-        } else {
-            result += c;
-        }
-    }
-    return result;
-}
-
 // Syllablize a line of text into an array of syllables.
 function syllablize(line) {
     if (line[line.length-1] !== ' ') {
@@ -116,7 +88,6 @@ function syllablize(line) {
     let current_syllable_internal="";
     let in_parentheses = false;
     let parenthetical_internal = "";
-    let parenthetical_internal_verbatim = "";
     let last_break = ' ';
     let running_word_index=0;
     let running_syllable_index=0;
@@ -126,10 +97,7 @@ function syllablize(line) {
     for (let i=0;i<line.length;i++) {
         let c = line[i];
         var c_caseless = c.toLowerCase();     
-        if (in_parentheses) {
-            parenthetical_internal_verbatim += c;
-        }
-
+        
         if (c==='^') { // word-accent
             accent_current_syllable = true;
         } if (c==='/') { // principle caesura
@@ -150,49 +118,30 @@ function syllablize(line) {
             current_syllable_display += '(';
         } else if ( c === ')'){
             in_parentheses = false;
-
-            //mark previous syllable as elided if current_syllable_internal has a vowel
-            if (first_part_has_vowel(parenthetical_internal_verbatim)){
-                console.log(syllables.length);
-                syllables[syllables.length-1].final_syllable_elided = true;
-                syllables[syllables.length-1].final_syllable = first_part_grab(parenthetical_internal_verbatim);
-            }
-
             current_syllable_display += ')';
             current_syllable_internal += parenthetical_internal;
-            parenthetical_internal="";
-            parenthetical_internal_verbatim="";
         }      
         
         if (syllable_breaks.includes(c) || c===')') {
             //if syllable nonempty, add it to the list of syllables
             console.log("length of " + current_syllable_internal + " is " +syllable_long(current_syllable_internal) );
             if (current_syllable_display.length > 0) {
-                if (current_syllable_internal.length===0){
-                    //append display to previous syllable
-                    syllables[syllables.length-1].text_display += current_syllable_display;
-                } else {
-                    syllables.push({ 
-                        text_display: current_syllable_display, 
-                        text_internal: current_syllable_internal,
-                        syllable_long: syllable_long(current_syllable_internal),
-                        accented: accent_current_syllable,
-                        word_index: running_word_index,
-                        syllable_index: running_syllable_index,
-                        start_syllable: last_break === ' ',
-                        end_syllable: c === ' ' || letters.includes(line[i+1])===false,
-                        final_syllable_elided: false,                        
-                        final_syllable: //only meaningful if end_syllable is true:
-                                (c === ' ' || letters.includes(line[i+1])===false)
-                                    ?current_syllable_internal:"",
-                        pause_after: false ,
-                        foot_start : false,
-                        foot_end : false,
-                        foot_position : -1,
-                        foot_index: -1,
-                        foot_type: "", //D,S,T          
-                    });
-                }
+                syllables.push({ 
+                    text_display: current_syllable_display, 
+                    text_internal: current_syllable_internal,
+                    syllable_long: syllable_long(current_syllable_internal),
+                    accented: accent_current_syllable,
+                    word_index: running_word_index,
+                    syllable_index: running_syllable_index,
+                    start_syllable: last_break === ' ',
+                    end_syllable: c === ' ',
+                    pause_after: false ,
+                    foot_start : false,
+                    foot_end : false,
+                    foot_position : -1,
+                    foot_index: -1,
+                    foot_type: "", //D,S,T          
+                });
                 accent_current_syllable=false;
                 current_syllable_display = "";
                 current_syllable_internal = "";
@@ -203,9 +152,7 @@ function syllablize(line) {
                 running_word_index++;
                 running_syllable_index=0;
             } else {
-                if (!in_parentheses){
-                    running_syllable_index++;
-                }
+                running_syllable_index++;
             }
         } 
     }
@@ -222,10 +169,6 @@ function syllablize(line) {
             continue;
         }
 
-        var final_syllable_offset = syllable.final_syllable_elided? 1 : 0;
-
-        var syllable_count = 1+syllable.syllable_index + final_syllable_offset;
-
         if (word_already_accented){
             word_already_accented=false;
             continue;
@@ -237,24 +180,23 @@ function syllablize(line) {
         }
 
         //if this is a two-syllable word, accent the first syllable
-        else if (syllable_count===2) {
-            syllables[final_syllable_offset+i-1].accented = true;
+        else if (syllable.syllable_index===1) {
+            syllables[i-1].accented = true;
         }
         
         //if it ends with an enclytic, the penultimate syllable is stressed
-        else if (syllable.final_syllable === 'que') {
+        else if (syllable.text_internal === 'que') {
             // I'm leaving out -ne and -ve because they could just be part of a word
-            syllables[final_syllable_offset+i-1].accented = true;
+            syllables[i-1].accented = true;
         }
 
         // 	In a word of three or more syllables, the accent falls on the next to last syllable (sometimes called the "penult"), if that syllable is long.
-        else if (syllable_count>2 && syllables[final_syllable_offset+i-1].syllable_long === true) {
-            syllables[final_syllable_offset+i-1].accented = true;
+        else if (syllable.syllable_index > 1 && syllables[i-1].syllable_long === true) {
+            syllables[i-1].accented = true;
         }
         // Otherwise, the accent falls on the syllable before that (the "antepenult").
         else {
-            console.log(line);
-            syllables[final_syllable_offset+i-2].accented = true;
+            syllables[i-2].accented = true;
         }
         
     }
@@ -328,9 +270,6 @@ function syllablize(line) {
 const inputFilePath = 'input.txt';
 const lines = fs.readFileSync(inputFilePath, 'utf-8').split('\n');
 
-//pop off the first line and parse it as the starting line number
-let starting_line_number = parseInt(lines.shift());
-
 var syllablized_lines = [];
 // Syllablize each line
 for (let i=0;i<lines.length;i++) {
@@ -351,10 +290,7 @@ function syllablized_line_to_svg(syllablized_line){
     let syllable_count = syllablized_line.length;
 
     console.log("syllable count", syllable_count  );
-    const foot_width=150;
-    const syllable_width_dactyl=foot_width/3;
-    const syllable_width_spondee=foot_width/2;
-
+    const syllable_width=50;
     const syllable_height=20;
 
     
@@ -365,10 +301,11 @@ function syllablized_line_to_svg(syllablized_line){
 
     const caesura_width = 4;
 
-    let line_width = padding_left+ 6 * foot_width + padding_right;
+    let line_width = padding_left+ syllable_count * syllable_width + padding_right;
 
 
 
+    
     let result = "<svg width=\"" + line_width + "\" height=\"" + (syllable_height*2 + padding_top + padding_bottom) + "\"  viewBox=\"0 0 " + line_width + " " + (syllable_height*2 + padding_top + padding_bottom) + "\" xmlns=\"http://www.w3.org/2000/svg\">\n";
     //background blue
     // result += `<rect x="${0}" y="${0}" width="${line_width}" height="${syllable_height*2 + padding_top + padding_bottom}" style="fill:rgb(200,200,255);stroke-width:1;stroke:rgb(0,0,0)" />\n`;
@@ -381,34 +318,19 @@ function syllablized_line_to_svg(syllablized_line){
     result += `<path d="M 0 ${syllable_height} A ${syllable_height/2} ${syllable_height/2} 0 0 0 0 ${syllable_height*2}" stroke="black" stroke-width="1" fill="transparent" />\n`;
 
     //draw top and bottom lines of box
-    result += `<line x1="${0}" y1="${syllable_height}" x2="${6*foot_width}" y2="${syllable_height}" style="stroke:rgb(0,0,0);stroke-width:1" />\n`;
-    result += `<line x1="${0}" y1="${syllable_height*2}" x2="${6*foot_width}" y2="${syllable_height*2}" style="stroke:rgb(0,0,0);stroke-width:1" />\n`;
-    
-    let left_position = 0;
-
+    result += `<line x1="${0}" y1="${syllable_height}" x2="${syllable_count*syllable_width}" y2="${syllable_height}" style="stroke:rgb(0,0,0);stroke-width:1" />\n`;
+    result += `<line x1="${0}" y1="${syllable_height*2}" x2="${syllable_count*syllable_width}" y2="${syllable_height*2}" style="stroke:rgb(0,0,0);stroke-width:1" />\n`;
 
     for (let i=0;i<syllablized_line.length;i++) {
         let syllable = syllablized_line[i];
         let syllable_display = syllable.text_display;
-
-
-        var syllable_width = syllable.foot_type==="D"? syllable_width_dactyl : syllable_width_spondee;
-        if (syllable.foot_type==="D") {
-            if (syllable.foot_position===0) {
-                syllable_width = foot_width/3;
-            } else {
-                syllable_width = foot_width/3;            
-            }
-        }
-        let right_position = left_position + syllable_width;
-
         //add syllable label to svg
-        result += `<text x="${left_position + (0.5)*syllable_width}" y="${syllable_height/2}" text-anchor="middle" fill="black">${syllable_display}</text>\n`;
+        result += `<text x="${(i+0.5)*syllable_width}" y="${syllable_height/2}" text-anchor="middle" fill="black">${syllable_display}</text>\n`;
 
     
         //not a final syllable, add a hyphen
         if (!syllable.end_syllable) {        
-            result += `<text x="${left_position+(1)*syllable_width}" y="${syllable_height/2}" text-anchor="middle" fill="black">-</text>\n`;
+            result += `<text x="${(i+1)*syllable_width}" y="${syllable_height/2}" text-anchor="middle" fill="black">-</text>\n`;
         } else { //draw word-boundary lines
             //result += `<text x="${(i+1)*syllable_width}" y="${0}" text-anchor="middle" fill="black"> </text>\n`;
             //the above didn't work because labels with just spaces are ignored in svg - I thought that the fix was to use a non-breaking space
@@ -423,14 +345,14 @@ function syllablized_line_to_svg(syllablized_line){
                 if (i>0 && syllablized_line[i].pause_after) {
                     let line_height = (syllable.foot_end)? 0.5 : 0.5;
 
-                    result += `<line x1="${left_position+(1)*syllable_width-caesura_width/2}" y1="${(0.5+0)*syllable_height}" x2="${left_position+(1)*syllable_width-caesura_width/2}" y2="${(1+line_height-0)*syllable_height}" style="stroke:rgb(0,0,0);stroke-width:1" />\n`;	                    
-                    result += `<line x1="${left_position+(1)*syllable_width+caesura_width/2}" y1="${(0.5+0)*syllable_height}" x2="${left_position+(1)*syllable_width+caesura_width/2}" y2="${(1+line_height-0)*syllable_height}" style="stroke:rgb(0,0,0);stroke-width:1" />\n`;	                    
+                    result += `<line x1="${(i+1)*syllable_width-caesura_width/2}" y1="${(0.5+0)*syllable_height}" x2="${(i+1)*syllable_width-caesura_width/2}" y2="${(1+line_height-0)*syllable_height}" style="stroke:rgb(0,0,0);stroke-width:1" />\n`;	                    
+                    result += `<line x1="${(i+1)*syllable_width+caesura_width/2}" y1="${(0.5+0)*syllable_height}" x2="${(i+1)*syllable_width+caesura_width/2}" y2="${(1+line_height-0)*syllable_height}" style="stroke:rgb(0,0,0);stroke-width:1" />\n`;	                    
                 } else {
                     
                     //line-height is halved if above a caesura
                     let line_height = (syllable.foot_end)? 0.0 : 0.5;
                     //also halved if above a foot boundary
-                    result += `<line x1="${left_position+(1)*syllable_width}" y1="${0.5*syllable_height}" x2="${left_position+(1)*syllable_width}" y2="${(1+line_height)*syllable_height}" style="stroke:rgb(0,0,0);stroke-width:1" />\n`;
+                    result += `<line x1="${(i+1)*syllable_width}" y1="${0.5*syllable_height}" x2="${(i+1)*syllable_width}" y2="${(1+line_height)*syllable_height}" style="stroke:rgb(0,0,0);stroke-width:1" />\n`;
                 }
             }
         } 
@@ -439,7 +361,7 @@ function syllablized_line_to_svg(syllablized_line){
         if (syllable.foot_start && i>0 ) {
             console.log("foot start");
                 
-            result += `<line x1="${left_position+(0)*syllable_width}" y1="${syllable_height}" x2="${left_position+(0)*syllable_width}" y2="${syllable_height*2}" style="stroke:rgb(0,0,0);stroke-width:1" />\n`;	                    
+            result += `<line x1="${(i)*syllable_width}" y1="${syllable_height}" x2="${(i)*syllable_width}" y2="${syllable_height*2}" style="stroke:rgb(0,0,0);stroke-width:1" />\n`;	                    
         }
 
 
@@ -450,27 +372,23 @@ function syllablized_line_to_svg(syllablized_line){
             //result += `<line x1="${(i+0.4)*syllable_width}" y1="${syllable_height*1.25}" x2="${(i+0.5)*syllable_width}" y2="${syllable_height*1.75}" stroke-linecap="round" style="stroke:rgb(0,0,0);stroke-width:1.5 " />\n`;
             //result += `<line x1="${(i+0.5)*syllable_width}" y1="${syllable_height*1.75}" x2="${(i+0.6)*syllable_width}" y2="${syllable_height*1.25}" stroke-linecap="round" style="stroke:rgb(0,0,0);stroke-width:1.5" />\n`;
             //draw downward-pointing filled dart instead
-
-            var dart_width = foot_width/24;
-            result += `<path d="M ${left_position+(0.5)*syllable_width-dart_width} ${syllable_height*1.25} L ${left_position+(0.5)*syllable_width} ${syllable_height*1.75} L ${left_position+(0.5)*syllable_width+dart_width} ${syllable_height*1.25} L ${left_position+(0.5)*syllable_width} ${syllable_height*1.5} Z" stroke="black" stroke-width="1" fill="black" />\n`;
+            result += `<path d="M ${(i+0.4)*syllable_width} ${syllable_height*1.25} L ${(i+0.5)*syllable_width} ${syllable_height*1.75} L ${(i+0.6)*syllable_width} ${syllable_height*1.25} L ${(i+0.5)*syllable_width} ${syllable_height*1.5} Z" stroke="black" stroke-width="1" fill="black" />\n`;
             
         }
         else {
             //draw small filled circle
-            result += `<circle cx="${left_position+(0.5)*syllable_width}" cy="${syllable_height*1.5}" r="2" stroke="black" stroke-width="1" fill="black" />\n`;
+            result += `<circle cx="${(i+0.5)*syllable_width}" cy="${syllable_height*1.5}" r="2" stroke="black" stroke-width="1" fill="black" />\n`;
         }
         
     
 
         // result += `<rect x="${i*syllable_width}" y="${syllable_height}" width="${syllable_width}" height="${syllable_height}" style="fill:rgb(255,255,255);stroke-width:1;stroke:rgb(0,0,0)" />\n`;
-
-        left_position = right_position;
     }
 
     
     //result += `<line x1="${(syllable_count)*syllable_width}" y1="${syllable_height}" x2="${(syllable_count)*syllable_width}" y2="${syllable_height*2}" style="stroke:rgb(0,0,0);stroke-width:1" />\n`;
     //draw final foot ending - a semicircular arc at the end of the line
-    result += `<path d="M ${6*foot_width} ${syllable_height} A ${syllable_height/2} ${syllable_height/2} 0 0 1 ${6*foot_width} ${syllable_height*2}" stroke="black" stroke-width="1" fill="transparent" />\n`;
+    result += `<path d="M ${syllable_count*syllable_width} ${syllable_height} A ${syllable_height/2} ${syllable_height/2} 0 0 1 ${syllable_count*syllable_width} ${syllable_height*2}" stroke="black" stroke-width="1" fill="transparent" />\n`;
 
     result += "</g></svg>";
     return result;
@@ -485,25 +403,11 @@ for (let i=0;i<syllablized_lines.length;i++) {
 }
 
 //genereate html page
-let html = `<html><head>
-<style>
-img { vertical-align:top; }
-.line {
-    color: #888;
-    font-size: 70%;
-}
-body {
-    font-family: 'Noto Serif';
-    font-size: 20px;
-}
-</style>
-</head><body>\n`;
+let html = "<html><body>\n";
 for (let i=0;i<syllablized_lines.length;i++) {
-    var line_number = starting_line_number + i;
-
     let filename = "svg/" + i + ".svg";
-    html += `<span class="line">${line_number}:</span> <img src="${filename}" />\n`;
-    html += "<br/>\n";
+    html += `<img src="${filename}" />\n`;
+    html += "<p/>\n";
 }
 html += "</body></html>";
 fs.writeFileSync("index.html", html);

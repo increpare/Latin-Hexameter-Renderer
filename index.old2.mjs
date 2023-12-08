@@ -75,34 +75,6 @@ function syllable_long(syllable) {
     
     return false;
 }
-
-function first_part_has_vowel(syllable) {
-    for (let i=0;i<syllable.length;i++) {
-        var c = syllable[i];
-        if (vowels.includes(c)) {
-            return true;
-        }
-        if (c === " " ){
-            return false;
-        }
-    }
-    return false;
-}
-
-function first_part_grab(syllable) {
-    var result="";
-    for (let i=0;i<syllable.length;i++) {
-        var c = syllable[i];
-       
-        if (c === " " ){
-            return result;
-        } else {
-            result += c;
-        }
-    }
-    return result;
-}
-
 // Syllablize a line of text into an array of syllables.
 function syllablize(line) {
     if (line[line.length-1] !== ' ') {
@@ -116,7 +88,6 @@ function syllablize(line) {
     let current_syllable_internal="";
     let in_parentheses = false;
     let parenthetical_internal = "";
-    let parenthetical_internal_verbatim = "";
     let last_break = ' ';
     let running_word_index=0;
     let running_syllable_index=0;
@@ -126,10 +97,7 @@ function syllablize(line) {
     for (let i=0;i<line.length;i++) {
         let c = line[i];
         var c_caseless = c.toLowerCase();     
-        if (in_parentheses) {
-            parenthetical_internal_verbatim += c;
-        }
-
+        
         if (c==='^') { // word-accent
             accent_current_syllable = true;
         } if (c==='/') { // principle caesura
@@ -150,18 +118,8 @@ function syllablize(line) {
             current_syllable_display += '(';
         } else if ( c === ')'){
             in_parentheses = false;
-
-            //mark previous syllable as elided if current_syllable_internal has a vowel
-            if (first_part_has_vowel(parenthetical_internal_verbatim)){
-                console.log(syllables.length);
-                syllables[syllables.length-1].final_syllable_elided = true;
-                syllables[syllables.length-1].final_syllable = first_part_grab(parenthetical_internal_verbatim);
-            }
-
             current_syllable_display += ')';
             current_syllable_internal += parenthetical_internal;
-            parenthetical_internal="";
-            parenthetical_internal_verbatim="";
         }      
         
         if (syllable_breaks.includes(c) || c===')') {
@@ -181,10 +139,6 @@ function syllablize(line) {
                         syllable_index: running_syllable_index,
                         start_syllable: last_break === ' ',
                         end_syllable: c === ' ' || letters.includes(line[i+1])===false,
-                        final_syllable_elided: false,                        
-                        final_syllable: //only meaningful if end_syllable is true:
-                                (c === ' ' || letters.includes(line[i+1])===false)
-                                    ?current_syllable_internal:"",
                         pause_after: false ,
                         foot_start : false,
                         foot_end : false,
@@ -203,9 +157,7 @@ function syllablize(line) {
                 running_word_index++;
                 running_syllable_index=0;
             } else {
-                if (!in_parentheses){
-                    running_syllable_index++;
-                }
+                running_syllable_index++;
             }
         } 
     }
@@ -222,10 +174,6 @@ function syllablize(line) {
             continue;
         }
 
-        var final_syllable_offset = syllable.final_syllable_elided? 1 : 0;
-
-        var syllable_count = 1+syllable.syllable_index + final_syllable_offset;
-
         if (word_already_accented){
             word_already_accented=false;
             continue;
@@ -237,24 +185,23 @@ function syllablize(line) {
         }
 
         //if this is a two-syllable word, accent the first syllable
-        else if (syllable_count===2) {
-            syllables[final_syllable_offset+i-1].accented = true;
+        else if (syllable.syllable_index===1) {
+            syllables[i-1].accented = true;
         }
         
         //if it ends with an enclytic, the penultimate syllable is stressed
-        else if (syllable.final_syllable === 'que') {
+        else if (syllable.text_internal === 'que') {
             // I'm leaving out -ne and -ve because they could just be part of a word
-            syllables[final_syllable_offset+i-1].accented = true;
+            syllables[i-1].accented = true;
         }
 
         // 	In a word of three or more syllables, the accent falls on the next to last syllable (sometimes called the "penult"), if that syllable is long.
-        else if (syllable_count>2 && syllables[final_syllable_offset+i-1].syllable_long === true) {
-            syllables[final_syllable_offset+i-1].accented = true;
+        else if (syllable.syllable_index > 1 && syllables[i-1].syllable_long === true) {
+            syllables[i-1].accented = true;
         }
         // Otherwise, the accent falls on the syllable before that (the "antepenult").
         else {
-            console.log(line);
-            syllables[final_syllable_offset+i-2].accented = true;
+            syllables[i-2].accented = true;
         }
         
     }
@@ -328,9 +275,6 @@ function syllablize(line) {
 const inputFilePath = 'input.txt';
 const lines = fs.readFileSync(inputFilePath, 'utf-8').split('\n');
 
-//pop off the first line and parse it as the starting line number
-let starting_line_number = parseInt(lines.shift());
-
 var syllablized_lines = [];
 // Syllablize each line
 for (let i=0;i<lines.length;i++) {
@@ -393,13 +337,6 @@ function syllablized_line_to_svg(syllablized_line){
 
 
         var syllable_width = syllable.foot_type==="D"? syllable_width_dactyl : syllable_width_spondee;
-        if (syllable.foot_type==="D") {
-            if (syllable.foot_position===0) {
-                syllable_width = foot_width/3;
-            } else {
-                syllable_width = foot_width/3;            
-            }
-        }
         let right_position = left_position + syllable_width;
 
         //add syllable label to svg
@@ -450,9 +387,7 @@ function syllablized_line_to_svg(syllablized_line){
             //result += `<line x1="${(i+0.4)*syllable_width}" y1="${syllable_height*1.25}" x2="${(i+0.5)*syllable_width}" y2="${syllable_height*1.75}" stroke-linecap="round" style="stroke:rgb(0,0,0);stroke-width:1.5 " />\n`;
             //result += `<line x1="${(i+0.5)*syllable_width}" y1="${syllable_height*1.75}" x2="${(i+0.6)*syllable_width}" y2="${syllable_height*1.25}" stroke-linecap="round" style="stroke:rgb(0,0,0);stroke-width:1.5" />\n`;
             //draw downward-pointing filled dart instead
-
-            var dart_width = foot_width/24;
-            result += `<path d="M ${left_position+(0.5)*syllable_width-dart_width} ${syllable_height*1.25} L ${left_position+(0.5)*syllable_width} ${syllable_height*1.75} L ${left_position+(0.5)*syllable_width+dart_width} ${syllable_height*1.25} L ${left_position+(0.5)*syllable_width} ${syllable_height*1.5} Z" stroke="black" stroke-width="1" fill="black" />\n`;
+            result += `<path d="M ${left_position+(0.4)*syllable_width} ${syllable_height*1.25} L ${left_position+(0.5)*syllable_width} ${syllable_height*1.75} L ${left_position+(0.6)*syllable_width} ${syllable_height*1.25} L ${left_position+(0.5)*syllable_width} ${syllable_height*1.5} Z" stroke="black" stroke-width="1" fill="black" />\n`;
             
         }
         else {
@@ -485,25 +420,11 @@ for (let i=0;i<syllablized_lines.length;i++) {
 }
 
 //genereate html page
-let html = `<html><head>
-<style>
-img { vertical-align:top; }
-.line {
-    color: #888;
-    font-size: 70%;
-}
-body {
-    font-family: 'Noto Serif';
-    font-size: 20px;
-}
-</style>
-</head><body>\n`;
+let html = "<html><body>\n";
 for (let i=0;i<syllablized_lines.length;i++) {
-    var line_number = starting_line_number + i;
-
     let filename = "svg/" + i + ".svg";
-    html += `<span class="line">${line_number}:</span> <img src="${filename}" />\n`;
-    html += "<br/>\n";
+    html += `<img src="${filename}" />\n`;
+    html += "<p/>\n";
 }
 html += "</body></html>";
 fs.writeFileSync("index.html", html);
