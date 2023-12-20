@@ -1,0 +1,59 @@
+<svg width="940" height="60"  viewBox="0 0 940 60" xmlns="http://www.w3.org/2000/svg">
+<g transform="translate(20,10)">
+<path d="M 0 20 A 10 10 0 0 0 0 40" stroke="black" stroke-width="1" fill="transparent" />
+<line x1="0" y1="20" x2="900" y2="20" style="stroke:rgb(0,0,0);stroke-width:1" />
+<line x1="0" y1="40" x2="900" y2="40" style="stroke:rgb(0,0,0);stroke-width:1" />
+<text x="25" y="10" text-anchor="middle" fill="black">"vir</text>
+<text x="50" y="10" text-anchor="middle" fill="black">-</text>
+<circle cx="25" cy="30" r="2" stroke="black" stroke-width="1" fill="black" />
+<text x="75" y="10" text-anchor="middle" fill="black">gi</text>
+<text x="100" y="10" text-anchor="middle" fill="black">-</text>
+<circle cx="75" cy="30" r="2" stroke="black" stroke-width="1" fill="black" />
+<text x="125" y="10" text-anchor="middle" fill="black">ni</text>
+<text x="150" y="10" text-anchor="middle" fill="black">-</text>
+<circle cx="125" cy="30" r="2" stroke="black" stroke-width="1" fill="black" />
+<text x="175" y="10" text-anchor="middle" fill="black">tā</text>
+<text x="200" y="10" text-anchor="middle" fill="black">-</text>
+<line x1="150" y1="20" x2="150" y2="40" style="stroke:rgb(0,0,0);stroke-width:1" />
+<path d="M 168.75 25 L 175 35 L 181.25 25 L 175 30 Z" stroke="black" stroke-width="1" fill="black" />
+<text x="225" y="10" text-anchor="middle" fill="black">te</text>
+<line x1="250" y1="10" x2="250" y2="30" style="stroke:rgb(0,0,0);stroke-width:1" />
+<circle cx="225" cy="30" r="2" stroke="black" stroke-width="1" fill="black" />
+<text x="275" y="10" text-anchor="middle" fill="black">fru</text>
+<text x="300" y="10" text-anchor="middle" fill="black">-</text>
+<path d="M 268.75 25 L 275 35 L 281.25 25 L 275 30 Z" stroke="black" stroke-width="1" fill="black" />
+<text x="337.5" y="10" text-anchor="middle" fill="black">ī;</text>
+<line x1="375" y1="10" x2="375" y2="30" style="stroke:rgb(0,0,0);stroke-width:1" />
+<line x1="300" y1="20" x2="300" y2="40" style="stroke:rgb(0,0,0);stroke-width:1" />
+<circle cx="337.5" cy="30" r="2" stroke="black" stroke-width="1" fill="black" />
+<text x="412.5" y="10" text-anchor="middle" fill="black">de</text>
+<text x="450" y="10" text-anchor="middle" fill="black">-</text>
+<path d="M 406.25 25 L 412.5 35 L 418.75 25 L 412.5 30 Z" stroke="black" stroke-width="1" fill="black" />
+<text x="487.5" y="10" text-anchor="middle" fill="black">dit</text>
+<line x1="525" y1="10" x2="525" y2="30" style="stroke:rgb(0,0,0);stroke-width:1" />
+<circle cx="487.5" cy="30" r="2" stroke="black" stroke-width="1" fill="black" />
+<text x="562.5" y="10" text-anchor="middle" fill="black">hoc</text>
+<line x1="600" y1="10" x2="600" y2="30" style="stroke:rgb(0,0,0);stroke-width:1" />
+<path d="M 556.25 25 L 562.5 35 L 568.75 25 L 562.5 30 Z" stroke="black" stroke-width="1" fill="black" />
+<text x="637.5" y="10" text-anchor="middle" fill="black">pa</text>
+<text x="675" y="10" text-anchor="middle" fill="black">-</text>
+<path d="M 631.25 25 L 637.5 35 L 643.75 25 L 637.5 30 Z" stroke="black" stroke-width="1" fill="black" />
+<text x="712.5" y="10" text-anchor="middle" fill="black">te(r</text>
+<line x1="750" y1="10" x2="750" y2="30" style="stroke:rgb(0,0,0);stroke-width:1" />
+<circle cx="712.5" cy="30" r="2" stroke="black" stroke-width="1" fill="black" />
+<text x="787.5" y="10" text-anchor="middle" fill="black">an)</text>
+<line x1="825" y1="10" x2="825" y2="30" style="stroke:rgb(0,0,0);stroke-width:1" />
+<path d="M 781.25 25 L 787.5 35 L 793.75 25 L 787.5 30 Z" stroke="black" stroke-width="1" fill="black" />
+<text x="862.5" y="10" text-anchor="middle" fill="black">te</text>
+<line x1="900" y1="10" x2="900" y2="30" style="stroke:rgb(0,0,0);stroke-width:1" />
+<circle cx="862.5" cy="30" r="2" stroke="black" stroke-width="1" fill="black" />
+<text x="937.5" y="10" text-anchor="middle" fill="black">Di</text>
+<text x="975" y="10" text-anchor="middle" fill="black">-</text>
+<circle cx="937.5" cy="30" r="2" stroke="black" stroke-width="1" fill="black" />
+<text x="1012.5" y="10" text-anchor="middle" fill="black">ā</text>
+<text x="1050" y="10" text-anchor="middle" fill="black">-</text>
+<path d="M 1006.25 25 L 1012.5 35 L 1018.75 25 L 1012.5 30 Z" stroke="black" stroke-width="1" fill="black" />
+<text x="1087.5" y="10" text-anchor="middle" fill="black">nae."</text>
+<circle cx="1087.5" cy="30" r="2" stroke="black" stroke-width="1" fill="black" />
+<path d="M 900 20 A 10 10 0 0 1 900 40" stroke="black" stroke-width="1" fill="transparent" />
+</g></svg>

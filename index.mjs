@@ -20,7 +20,7 @@ const vowels_long = 'āēīōūȳ';
 const diphthongs = ['ae', 'au', 'ei', 'eu', 'oe', 'ui', 'yi'];
 const consonants = ['c', 'k', 'ch', 'g', 'gn', 'i', 'j', 'l', 'p', 'ph', 'qu', 'quu', 'r', 'rh', 's', 't', 'th', 'v', 'vu', 'x', 'z', 'b', 'd', 'f', 'h', 'm', 'n', 'q'];
 const letters = vowels.split('').concat(vowels_long.split('')).concat(consonants);
-const punctuation = ['.', ',', ';', ':', '?', '!', '“', '”', '‘', '’', '"', '\''];
+const punctuation = ['.', ',', ';', ':', '?', '!', '“', '”', '‘', '’', '"', '\'','—'];
 const syllable_breaks = [' ', '-'];
 
 function syllable_long(syllable) {
@@ -87,6 +87,7 @@ function first_part_grab(syllable) {
 }
 
 // Syllablize a line of text into an array of syllables.
+// returns open-ness
 function syllablize(line) {
     if (line[line.length - 1] !== ' ') {
         line += ' ';
@@ -105,7 +106,7 @@ function syllablize(line) {
     let running_syllable_index = 0;
     let running_foot_index = 0;
     let accent_current_syllable = false;
-
+    let runon_syllable = false;
     for (let i = 0; i < line.length; i++) {
         let c = line[i];
         var c_caseless = c.toLowerCase();
@@ -119,7 +120,13 @@ function syllablize(line) {
             //add caesura to previous syllable
             syllables[syllables.length - 1].pause_after = true;
             i += 2;
-        } if (letters.includes(c_caseless)) {
+        } if (c=== '>') { //open-end to line, and start of next line should open also
+            runon_syllable = true;
+            // if not at end of line, print error
+            if (i<line.length-2){
+                console.log("ERROR: open-end > to line not at end of line");
+            }
+        } else if (letters.includes(c_caseless)) {
             current_syllable_display += c;
             if (in_parentheses) {
                 parenthetical_internal += c_caseless;
@@ -173,7 +180,8 @@ function syllablize(line) {
                         foot_end: false,
                         foot_position: -1,
                         foot_index: -1,
-                        foot_type: "", //D,S,T          
+                        foot_type: "", //D,S,T   
+                        runon_syllable: false,       
                     });
                 }
                 accent_current_syllable = false;
@@ -302,6 +310,13 @@ function syllablize(line) {
     //set foot end of final syllable
     syllables[syllables.length - 1].foot_end = true;
 
+    syllables[syllables.length - 1].foot_index = running_foot_index;
+
+
+    if (runon_syllable){
+        syllables[syllables.length - 1].runon_syllable = true;
+    }
+
     return syllables;
 }
 
@@ -318,7 +333,21 @@ var syllablized_lines = [];
 // Syllablize each line
 for (let i = 0; i < lines.length; i++) {
     var line = lines[i];
-    var syllablized_line = syllablize(line);
+    line = line.trim();
+    //if line doesn't end with punctuation or >
+    if (!punctuation.includes(line[line.length - 1]) && line[line.length - 1] !== ">") {
+        //add " >"
+        line += " >";
+    }
+    var syllablized_line = syllablize(line);    
+
+    if (i>0){
+        var prev_line = syllablized_lines[i-1];
+        //if previous line ended with open syllable, make first syllable of this line open
+        if (prev_line[prev_line.length-1].runon_syllable){
+            syllablized_line[0].runon_syllable = true;
+        }
+    }
     // console.log(line);
     // console.log(syllablized_line);
     syllablized_lines.push(syllablized_line);
@@ -416,11 +445,13 @@ function syllablized_line_to_svg(syllablized_line) {
     //transform to account for padding
     result += `<g transform="translate(${padding_left},${padding_top})">\n`;
 
-    //initial word-boundary line
-    //result += `<line x1="${0}" y1="${0.5*syllable_height}" x2="${0}" y2="${1.5*syllable_height}" style="stroke:rgb(0,0,0);stroke-width:1" />\n`;
-    //this was a line, but I've changed it to a semicircular arc, going counter-clockwise
-    result += `<path d="M 0 ${syllable_height} A ${syllable_height / 2} ${syllable_height / 2} 0 0 0 0 ${syllable_height * 2}" stroke="black" stroke-width="1" fill="transparent" />\n`;
-
+    //if opening syllable isn't runon, draw a line
+    if (!syllablized_line[0].runon_syllable){
+        //initial word-boundary line
+        //result += `<line x1="${0}" y1="${0.5*syllable_height}" x2="${0}" y2="${1.5*syllable_height}" style="stroke:rgb(0,0,0);stroke-width:1" />\n`;
+        //this was a line, but I've changed it to a semicircular arc, going counter-clockwise
+        result += `<path d="M 0 ${syllable_height} A ${syllable_height / 2} ${syllable_height / 2} 0 0 0 0 ${syllable_height * 2}" stroke="black" stroke-width="1" fill="transparent" />\n`;
+    }
     //draw top and bottom lines of box
     result += `<line x1="${0}" y1="${syllable_height}" x2="${6 * foot_width}" y2="${syllable_height}" style="stroke:rgb(0,0,0);stroke-width:1" />\n`;
     result += `<line x1="${0}" y1="${syllable_height * 2}" x2="${6 * foot_width}" y2="${syllable_height * 2}" style="stroke:rgb(0,0,0);stroke-width:1" />\n`;
@@ -454,7 +485,7 @@ function syllablized_line_to_svg(syllablized_line) {
 
             //line x coordinate is (i+1)*syllable_width                
             if (i < syllable_count - 1) {
-                if (i > 0 && syllablized_line[i].pause_after) {
+                if (syllablized_line[i].pause_after) {
                     let line_height = (syllable.foot_end) ? 0.5 : 0.5;
 
                     result += `<line x1="${left_position + (1) * syllable_width - caesura_width / 2}" y1="${(0.5 + 0) * syllable_height}" x2="${left_position + (1) * syllable_width - caesura_width / 2}" y2="${(1 + line_height - 0) * syllable_height}" style="stroke:rgb(0,0,0);stroke-width:1" />\n`;
@@ -466,7 +497,7 @@ function syllablized_line_to_svg(syllablized_line) {
                     //also halved if above a foot boundary
                     result += `<line x1="${left_position + (1) * syllable_width}" y1="${0.5 * syllable_height}" x2="${left_position + (1) * syllable_width}" y2="${(1 + line_height) * syllable_height}" style="stroke:rgb(0,0,0);stroke-width:1" />\n`;
                 }
-            }
+            } 
         }
 
         //draw foot boundary lines -- they go under the box
@@ -502,9 +533,12 @@ function syllablized_line_to_svg(syllablized_line) {
     }
 
 
-    //result += `<line x1="${(syllable_count)*syllable_width}" y1="${syllable_height}" x2="${(syllable_count)*syllable_width}" y2="${syllable_height*2}" style="stroke:rgb(0,0,0);stroke-width:1" />\n`;
-    //draw final foot ending - a semicircular arc at the end of the line
-    result += `<path d="M ${6 * foot_width} ${syllable_height} A ${syllable_height / 2} ${syllable_height / 2} 0 0 1 ${6 * foot_width} ${syllable_height * 2}" stroke="black" stroke-width="1" fill="transparent" />\n`;
+    //if final syllable isn't runon, draw a line
+    if (!syllablized_line[syllable_count - 1].runon_syllable){
+        //result += `<line x1="${(syllable_count)*syllable_width}" y1="${syllable_height}" x2="${(syllable_count)*syllable_width}" y2="${syllable_height*2}" style="stroke:rgb(0,0,0);stroke-width:1" />\n`;
+        //draw final foot ending - a semicircular arc at the end of the line
+        result += `<path d="M ${6 * foot_width} ${syllable_height} A ${syllable_height / 2} ${syllable_height / 2} 0 0 1 ${6 * foot_width} ${syllable_height * 2}" stroke="black" stroke-width="1" fill="transparent" />\n`;
+    }
 
     result += "</g></svg>";
     return result;

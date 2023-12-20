@@ -1,6 +1,5 @@
 <svg width="940" height="60"  viewBox="0 0 940 60" xmlns="http://www.w3.org/2000/svg">
 <g transform="translate(20,10)">
-<path d="M 0 20 A 10 10 0 0 0 0 40" stroke="black" stroke-width="1" fill="transparent" />
 <line x1="0" y1="20" x2="900" y2="20" style="stroke:rgb(0,0,0);stroke-width:1" />
 <line x1="0" y1="40" x2="900" y2="40" style="stroke:rgb(0,0,0);stroke-width:1" />
 <text x="37.5" y="10" text-anchor="middle" fill="black">for(s</text>
@@ -51,7 +50,7 @@
 <text x="825" y="10" text-anchor="middle" fill="black">-</text>
 <line x1="750" y1="20" x2="750" y2="40" style="stroke:rgb(0,0,0);stroke-width:1" />
 <path d="M 781.25 25 L 787.5 35 L 793.75 25 L 787.5 30 Z" stroke="black" stroke-width="1" fill="black" />
-<text x="862.5" y="10" text-anchor="middle" fill="black">ra,</text>
+<text x="862.5" y="10" text-anchor="middle" fill="black">ra;</text>
 <circle cx="862.5" cy="30" r="2" stroke="black" stroke-width="1" fill="black" />
 <path d="M 900 20 A 10 10 0 0 1 900 40" stroke="black" stroke-width="1" fill="transparent" />
 </g></svg>
