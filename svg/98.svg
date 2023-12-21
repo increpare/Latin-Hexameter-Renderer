@@ -3,54 +3,51 @@
 <path d="M 0 20 A 10 10 0 0 0 0 40" stroke="black" stroke-width="1" fill="transparent" />
 <line x1="0" y1="20" x2="900" y2="20" style="stroke:rgb(0,0,0);stroke-width:1" />
 <line x1="0" y1="40" x2="900" y2="40" style="stroke:rgb(0,0,0);stroke-width:1" />
-<text x="25" y="10" text-anchor="middle" fill="black">Phoe</text>
-<text x="50" y="10" text-anchor="middle" fill="black">-</text>
+<text x="25" y="10" text-anchor="middle" fill="black">pēs</text>
+<line x1="50" y1="10" x2="50" y2="30" style="stroke:rgb(0,0,0);stroke-width:1" />
 <path d="M 18.75 25 L 25 35 L 31.25 25 L 25 30 Z" stroke="black" stroke-width="1" fill="black" />
-<text x="75" y="10" text-anchor="middle" fill="black">bu(s</text>
-<line x1="100" y1="10" x2="100" y2="30" style="stroke:rgb(0,0,0);stroke-width:1" />
+<text x="75" y="10" text-anchor="middle" fill="black">mo</text>
+<text x="100" y="10" text-anchor="middle" fill="black">-</text>
 <path d="M 68.75 25 L 75 35 L 81.25 25 L 75 30 Z" stroke="black" stroke-width="1" fill="black" />
-<text x="125" y="10" text-anchor="middle" fill="black">a)</text>
+<text x="125" y="10" text-anchor="middle" fill="black">do</text>
 <line x1="150" y1="10" x2="150" y2="20" style="stroke:rgb(0,0,0);stroke-width:1" />
-<path d="M 118.75 25 L 125 35 L 131.25 25 L 125 30 Z" stroke="black" stroke-width="1" fill="black" />
-<text x="187.5" y="10" text-anchor="middle" fill="black">mat</text>
+<circle cx="125" cy="30" r="2" stroke="black" stroke-width="1" fill="black" />
+<text x="187.5" y="10" text-anchor="middle" fill="black">tam</text>
 <line x1="225" y1="10" x2="225" y2="30" style="stroke:rgb(0,0,0);stroke-width:1" />
 <line x1="150" y1="20" x2="150" y2="40" style="stroke:rgb(0,0,0);stroke-width:1" />
-<circle cx="187.5" cy="30" r="2" stroke="black" stroke-width="1" fill="black" />
-<text x="262.5" y="10" text-anchor="middle" fill="black">vī</text>
+<path d="M 181.25 25 L 187.5 35 L 193.75 25 L 187.5 30 Z" stroke="black" stroke-width="1" fill="black" />
+<text x="262.5" y="10" text-anchor="middle" fill="black">vē</text>
 <text x="300" y="10" text-anchor="middle" fill="black">-</text>
-<circle cx="262.5" cy="30" r="2" stroke="black" stroke-width="1" fill="black" />
-<text x="325" y="10" text-anchor="middle" fill="black">sae</text>
-<text x="350" y="10" text-anchor="middle" fill="black">-</text>
+<path d="M 256.25 25 L 262.5 35 L 268.75 25 L 262.5 30 Z" stroke="black" stroke-width="1" fill="black" />
+<text x="337.5" y="10" text-anchor="middle" fill="black">lōx</text>
+<line x1="375" y1="10" x2="375" y2="30" style="stroke:rgb(0,0,0);stroke-width:1" />
 <line x1="300" y1="20" x2="300" y2="40" style="stroke:rgb(0,0,0);stroke-width:1" />
-<path d="M 318.75 25 L 325 35 L 331.25 25 L 325 30 Z" stroke="black" stroke-width="1" fill="black" />
-<text x="375" y="10" text-anchor="middle" fill="black">que</text>
-<line x1="400" y1="10" x2="400" y2="30" style="stroke:rgb(0,0,0);stroke-width:1" />
-<circle cx="375" cy="30" r="2" stroke="black" stroke-width="1" fill="black" />
-<text x="425" y="10" text-anchor="middle" fill="black">cu</text>
+<circle cx="337.5" cy="30" r="2" stroke="black" stroke-width="1" fill="black" />
+<text x="412.5" y="10" text-anchor="middle" fill="black">pig</text>
 <text x="450" y="10" text-anchor="middle" fill="black">-</text>
-<path d="M 418.75 25 L 425 35 L 431.25 25 L 425 30 Z" stroke="black" stroke-width="1" fill="black" />
-<text x="487.5" y="10" text-anchor="middle" fill="black">put</text>
+<path d="M 406.25 25 L 412.5 35 L 418.75 25 L 412.5 30 Z" stroke="black" stroke-width="1" fill="black" />
+<text x="487.5" y="10" text-anchor="middle" fill="black">rīs</text>
 <line x1="525" y1="10" x2="525" y2="30" style="stroke:rgb(0,0,0);stroke-width:1" />
 <line x1="450" y1="20" x2="450" y2="40" style="stroke:rgb(0,0,0);stroke-width:1" />
 <circle cx="487.5" cy="30" r="2" stroke="black" stroke-width="1" fill="black" />
-<text x="562.5" y="10" text-anchor="middle" fill="black">cō</text>
+<text x="562.5" y="10" text-anchor="middle" fill="black">rā</text>
 <text x="600" y="10" text-anchor="middle" fill="black">-</text>
 <circle cx="562.5" cy="30" r="2" stroke="black" stroke-width="1" fill="black" />
-<text x="625" y="10" text-anchor="middle" fill="black">nū</text>
+<text x="625" y="10" text-anchor="middle" fill="black">dī</text>
 <text x="650" y="10" text-anchor="middle" fill="black">-</text>
 <line x1="600" y1="20" x2="600" y2="40" style="stroke:rgb(0,0,0);stroke-width:1" />
 <path d="M 618.75 25 L 625 35 L 631.25 25 L 625 30 Z" stroke="black" stroke-width="1" fill="black" />
-<text x="675" y="10" text-anchor="middle" fill="black">bi</text>
+<text x="675" y="10" text-anchor="middle" fill="black">ci</text>
 <text x="700" y="10" text-anchor="middle" fill="black">-</text>
 <circle cx="675" cy="30" r="2" stroke="black" stroke-width="1" fill="black" />
-<text x="725" y="10" text-anchor="middle" fill="black">a</text>
+<text x="725" y="10" text-anchor="middle" fill="black">bu(s</text>
 <line x1="750" y1="10" x2="750" y2="20" style="stroke:rgb(0,0,0);stroke-width:1" />
 <circle cx="725" cy="30" r="2" stroke="black" stroke-width="1" fill="black" />
-<text x="787.5" y="10" text-anchor="middle" fill="black">Daph</text>
-<text x="825" y="10" text-anchor="middle" fill="black">-</text>
+<text x="787.5" y="10" text-anchor="middle" fill="black">hae)</text>
+<line x1="825" y1="10" x2="825" y2="30" style="stroke:rgb(0,0,0);stroke-width:1" />
 <line x1="750" y1="20" x2="750" y2="40" style="stroke:rgb(0,0,0);stroke-width:1" />
 <path d="M 781.25 25 L 787.5 35 L 793.75 25 L 787.5 30 Z" stroke="black" stroke-width="1" fill="black" />
-<text x="862.5" y="10" text-anchor="middle" fill="black">nēs,</text>
+<text x="862.5" y="10" text-anchor="middle" fill="black">ret,</text>
 <circle cx="862.5" cy="30" r="2" stroke="black" stroke-width="1" fill="black" />
 <path d="M 900 20 A 10 10 0 0 1 900 40" stroke="black" stroke-width="1" fill="transparent" />
 </g></svg>

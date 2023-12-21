@@ -23,6 +23,48 @@ const letters = vowels.split('').concat(vowels_long.split('')).concat(consonants
 const punctuation = ['.', ',', ';', ':', '?', '!', '“', '”', '‘', '’', '"', '\'','—'];
 const syllable_breaks = [' ', '-'];
 
+//parse a string, splitting into words, but have array entries for punctuation/whitespace
+function parse_line(line) {
+    let result = []; //tokens can be words or punctuation/whitespace sections
+    let current_token = "";
+    let mode = "unknown"; //can be unknown, word, or punctuation
+    for (let i = 0; i < line.length; i++) {
+        let c = line[i];
+        if (letters.includes(c)) {
+            if (mode === "unknown") {
+                mode = "word";
+            }
+            current_token += c;
+        } else if (punctuation.includes(c)) {
+            if (mode === "unknown") {
+                mode = "punctuation";
+            }
+            if (mode === "word") {
+                result.push(current_token);
+                current_token = "";
+                mode = "punctuation";
+            }
+            current_token += c;
+            result.push(current_token);
+            current_token = "";
+        } else if (syllable_breaks.includes(c)) {
+            if (mode === "unknown") {
+                mode = "whitespace";
+            }
+            if (mode === "word") {
+                result.push(current_token);
+                current_token = "";
+                mode = "whitespace";
+            }
+            current_token += c;
+            result.push(current_token);
+            current_token = "";
+        } else {
+            console.log(`ERROR: unrecognized character ${c} in line ${line}`);
+        }
+    }
+}
+
 function syllable_long(syllable) {
     //if it contains a long vowel, it's long
     for (let i = 0; i < syllable.length; i++) {
@@ -30,6 +72,12 @@ function syllable_long(syllable) {
             return true;
         }
     }
+
+    //if it starts with qu, remove the qu - bit of a cheat but chopping off initial consonants doesn't affect length ^^
+    if (syllable.startsWith('qu')) {
+        syllable = syllable.slice(2);
+    }
+
     //if it contains a diphthong as a substring, it's long
     for (let i = 0; i < diphthongs.length; i++) {
         let diphthong = diphthongs[i];
@@ -72,6 +120,22 @@ function first_part_has_vowel(syllable) {
     return false;
 }
 
+function second_part_has_vowel(syllable) {
+    var found_space = false;
+    for (let i = 0; i < syllable.length; i++) {
+        var c = syllable[i];
+        if (found_space) {
+            if (vowels.includes(c)) {
+                return true;
+            }
+        }
+        if (c === " ") {
+            found_space = true;
+        }
+    }
+    return false;
+}
+
 function first_part_grab(syllable) {
     var result = "";
     for (let i = 0; i < syllable.length; i++) {
@@ -80,6 +144,32 @@ function first_part_grab(syllable) {
         if (c === " ") {
             return result;
         } else {
+            result += c;
+        }
+    }
+    return result;
+}
+
+function second_part_grab(syllable) {
+    var result = "";
+    var found_space = false;
+    for (let i = 0; i < syllable.length; i++) {
+        var c = syllable[i];
+        if (found_space) {
+            result += c;
+        }
+        if (c === " ") {
+            found_space = true;
+        }
+    }
+    return result;
+}
+
+function strip_whitespace_and_punctuation_and_parens(syllable){
+    var result = "";
+    for (let i = 0; i < syllable.length; i++) {
+        var c = syllable[i];
+        if (!punctuation.includes(c) && c !== " " && c !== "(" && c !== ")"){
             result += c;
         }
     }
@@ -147,6 +237,24 @@ function syllablize(line) {
                 syllables[syllables.length - 1].final_syllable_elided = true;
                 syllables[syllables.length - 1].final_syllable = first_part_grab(parenthetical_internal_verbatim);
             }
+
+            // if both parts have vowels, can strip vowels from the internal representation of the first part
+            if (first_part_has_vowel(parenthetical_internal_verbatim) && second_part_has_vowel(parenthetical_internal_verbatim)) {
+                let first_part = first_part_grab(parenthetical_internal_verbatim);
+                let second_part = second_part_grab(parenthetical_internal_verbatim);
+
+                //strip vowels from first part
+                var first_part_stripped = "";
+                for (let i = 0; i < first_part.length; i++) {
+                    let c = first_part[i];
+                    if (!vowels.includes(c)) {
+                        first_part_stripped += c;
+                    }
+                }
+                parenthetical_internal = strip_whitespace_and_punctuation_and_parens(first_part_stripped) + strip_whitespace_and_punctuation_and_parens(second_part);
+
+            }
+            
 
             current_syllable_display += ')';
             current_syllable_internal += parenthetical_internal;
@@ -268,8 +376,9 @@ function syllablize(line) {
                 // console.log(`first syllable long: ${syllable.text_display} (${syllable.text_internal})`);
             } else {
                 //if first syllable is short, display an informative error message
-                console.log(`ERROR: foot starts with short syllable: ${syllable.text_display} (${syllable.text_internal})`);
                 console.log(`line: ${line}`);
+                console.log(`ERROR: foot starts with short syllable "${syllable.text_display}" (internal: "${syllable.text_internal}")`);
+                break;
             }
         } else if (foot_syllable_index === 1) {
             // console.log(`second syllable: ${syllable.text_display} (${syllable.text_internal}) length: ${syllable.syllable_long}`);
@@ -287,8 +396,9 @@ function syllablize(line) {
                 }
                 //otherwise, if the next syllable is long, print an error
                 else if (syllables[i + 1].syllable_long) {
-                    console.log(`ERROR: foot starts with short syllable: ${syllable.text_display} (${syllable.text_internal})`);
                     console.log(`line: ${line}`);
+                    console.log(`ERROR: foot starts with short syllable: "${syllable.text_display}" (internal "${syllable.text_internal}")`);
+                    break;
                 } else {
                     //otherwise, it's a dactyl
                     syllables[i - 1].foot_type = "D";
@@ -300,8 +410,9 @@ function syllablize(line) {
             }
         } else {
             //error
-            console.log(`foot detection screwed up ${syllable.text_display} ( ${syllable.text_internal})`);
             console.log(`line: ${line}`);
+            console.log(`ERROR: foot detection screwed up "${syllable.text_display}" (internal: "${syllable.text_internal})"`);
+            break;
         }
         foot_syllable_index++;
 
@@ -369,7 +480,7 @@ function GetTestResults(line){
     return JSON.stringify(data);
 }
 
-console.log("running tests");
+// console.log("running tests");
 //load tests.txt
 const testsFilePath = 'tests.txt';
 const tests = fs.readFileSync(testsFilePath, 'utf-8').split('\n');
@@ -380,20 +491,20 @@ for (let i = 0; i < tests.length; i++) {
         var [test_line,test_feet,test_stresses] = JSON.parse(tests[i]);
         var [calculated_line, calculated_feet, calculated_stresses ]  = JSON.parse(GetTestResults(test_line));
     } catch (error) {
-        console.log(`ERROR: An error was thrown while processing test ${i}:\n  ${test_line}`);
+        console.log(`TEST ERROR: An error was thrown while processing test ${i}:\n  ${test_line}`);
         console.log(`${error}`);
         error_count++;
     }
 
     var found_error=false;
     if (test_feet !== calculated_feet){
-        console.log(`ERROR: feet mismatch in test ${i}:\n  ${test_line}`);
+        console.log(`TEST ERROR: feet mismatch in test ${i}:\n  ${test_line}`);
         console.log(`expected:   ${test_feet}`);
         console.log(`calculated: ${calculated_feet}`);
         found_error=true;
     }
     if (test_stresses !== calculated_stresses){
-        console.log(`ERROR: stresses mismatch in test ${i}:\n  ${test_line}`);
+        console.log(`TEST ERROR: stresses mismatch in test ${i}:\n  ${test_line}`);
         console.log(`expected:   ${test_stresses}`);
         console.log(`calculated: ${calculated_stresses}`);
         found_error=true;
@@ -403,13 +514,13 @@ for (let i = 0; i < tests.length; i++) {
         error_count++;
     }
 }
-console.log(`TESTS COMPLETE: ${tests.length-error_count}/${tests.length} passed`);
+// console.log(`TESTS COMPLETE: ${tests.length-error_count}/${tests.length} passed`);
 
-console.log("generating test data");
-for (let i = 0; i < lines.length; i++) {
-    var line = lines[i];
-    console.log(GetTestResults(line));
-}
+// console.log("generating test data");
+// for (let i = 0; i < lines.length; i++) {
+//     var line = lines[i];
+//     console.log(GetTestResults(line));
+// }
 
 //now we have the data, we can start generating the svg files
 const svg_folder = 'svg';
@@ -571,6 +682,13 @@ for (let i = 0; i < syllablized_lines.length; i++) {
     var line = lines[i];
 
     let filename = `svg/${i}.svg`;
+    //escape line to make it safe for javascript inclusion
+    line = line.replace(/"/g, '\\"');
+    line = line.replace(/'/g, "\\'");
+    line = line.replace(/</g, '&lt;');
+    line = line.replace(/>/g, '&gt;');
+    
+
     html += `<span class="line">${line_number}:</span> <img alt="${line}" src="${filename}"  />\n`;
     html += "<br/>\n";
 }
