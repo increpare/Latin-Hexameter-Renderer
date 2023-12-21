@@ -11,4 +11,6 @@ vī-de-ra(t // ad)duc-tō flec-ten-tem cor-nu-a ner-vō;
 dīx-e-ra(t; // "Is)ta de-cent u-me-rōs ges-tā-mi-na nos-trōs,
 ```
 
+I was thinking about how I'd prefer to indicate metrical and accent information (it also hints that when there are run-on lines, either with a '>' explicitly, or if you end a line with no punctuation).
+
 line_syllabification.html is some kind of broken/janky code to insert hyphens between syllables, but it doesn't work great (nonetheless it's an okay start)...it uses https://github.com/bramstein/hypher and the Latin data file for it from https://github.com/bramstein/hyphenation-patterns
