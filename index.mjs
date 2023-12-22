@@ -194,7 +194,6 @@ function syllablize(line) {
     let last_break = ' ';
     let running_word_index = 0;
     let running_syllable_index = 0;
-    let running_foot_index = 0;
     let accent_current_syllable = false;
     let runon_syllable = false;
     for (let i = 0; i < line.length; i++) {
@@ -361,11 +360,13 @@ function syllablize(line) {
     //now we have the syllables, we can add the foot information
     //feet are either long-short-short (dactyl), long-long (spondee)
     let foot_syllable_index = 0;
+    let running_foot_index = -1;
     for (let i = 0; i < syllables.length; i++) {
         let syllable = syllables[i];
         syllable.foot_position = foot_syllable_index;
 
         if (foot_syllable_index === 0) {
+            running_foot_index++;
             syllable.foot_start = true;
             //set foot end of previous
             if (i > 0) {
@@ -414,15 +415,25 @@ function syllablize(line) {
             console.log(`ERROR: foot detection screwed up "${syllable.text_display}" (internal: "${syllable.text_internal})"`);
             break;
         }
+
+        syllable.foot_index = running_foot_index;
+
         foot_syllable_index++;
 
+    }
 
+    //if less than 6 feet,error
+    if (running_foot_index < 5) {
+        console.log(`line: ${line}`);
+        console.log(`ERROR: line has less than 6 feet`);
+    } else if (running_foot_index > 5) {
+        console.log(`line: ${line}`);
+        console.log(`ERROR: line has more than 5 feet`);
     }
     //set foot end of final syllable
     syllables[syllables.length - 1].foot_end = true;
 
     syllables[syllables.length - 1].foot_index = running_foot_index;
-
 
     if (runon_syllable){
         syllables[syllables.length - 1].runon_syllable = true;
