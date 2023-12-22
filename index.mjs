@@ -666,25 +666,23 @@ function syllablized_line_to_svg(syllablized_line) {
     return result;
 }
 
-//generate svg files for each line
-for (let i = 0; i < syllablized_lines.length; i++) {
-    let syllablized_line = syllablized_lines[i];
-    let svg = syllablized_line_to_svg(syllablized_line);
-    let filename = `svg/${i}.svg`;
-    fs.writeFileSync(filename, svg);
-}
-
 //genereate html page
 let html = `<html lang="en"><head><meta charset="utf-8">
 <style>
 img { vertical-align:top; }
 .line {
+    display:inline-block;
     color: #888;
     font-size: 70%;
+    margin-top:7px;
 }
 body {
     font-family: 'Noto Serif';
     font-size: 20px;
+}
+
+svg {
+    vertical-align: top;
 }
 </style>
 </head><body>\n`;
@@ -692,16 +690,19 @@ for (let i = 0; i < syllablized_lines.length; i++) {
     var line_number = starting_line_number + i;
     var line = lines[i];
 
-    let filename = `svg/${i}.svg`;
+    // let filename = `svg/${i}.svg`;
     //escape line to make it safe for javascript inclusion
     line = line.replace(/"/g, '\\"');
     line = line.replace(/'/g, "\\'");
     line = line.replace(/</g, '&lt;');
     line = line.replace(/>/g, '&gt;');
     
+    let syllablized_line = syllablized_lines[i];
+    let svg = syllablized_line_to_svg(syllablized_line);
+    // let filename = `svg/${i}.svg`;
+    // fs.writeFileSync(filename, svg);
 
-    html += `<span class="line">${line_number}:</span> <img alt="${line}" src="${filename}"  />\n`;
-    html += "<br/>\n";
+    html += `<span class="line">${line_number}:</span>${svg}<br/>\n`;
 }
 html += "</body></html>";
 fs.writeFileSync("index.html", html);

@@ -33,7 +33,7 @@ sae-pe pa-ter dī-xit, "Dē-bēs mi-hi, nā-ta, ne-pō-tēs."
 Il-la, ve-lut crī-men tae-dās ex-ō-sa iu-gā-lēs,
 pul-chra ve-rē-cun-dō suf-fun-di-tu(r ō)ra ru-bō-re,
 in-que pa-tris blan-dīs hae-rēns cer-vī-ce la-cer-tīs,
-"Dā mi-hi- per-pe-tu-ā, ge-ni-tor cā-ris-si-me," dīx-it.
+"Dā mi-hi- per-pe-tu-ā, // ge-ni-tor cā-ris-si-me," // dīx-it.
 "vir-gi-ni-tā-te fru-ī; // de-di(t hoc) pa-te(r an)te Di-ā-nae."
 Il-le qui-(dem ob)se-qui-tur; // sed tē de-co(r is)te, quo(d op)tās,
 es-se ve-tat, vō-tō-que tu-ō tu-a fōr-ma re-pug-nat.
@@ -41,23 +41,23 @@ Phoe-bu(s a)mat vī-sae-que cu-put cō-nū-bi-a Daph-nēs,
 quod-que cu-pit, spē-rat, su-a(que il)(lum ō)rā-cu-la fal-lunt.
 Ut-que le-vēs sti-pu-lae dēmp-tī(s a)do-len-tu(r a)ris-tīs,
 ut fa-ci-bus sae-pē(s ar)dent, // quās for-te vi-ā-tor
-vel nimis ad-mō-vit ve(l i)am sub lū-ce re-lī-quit,
+vel ni-mi(s ad)-mō-vit ve(l i)am sub lū-ce re-lī-quit,
 sīc de-u(s in) flam-mās a(b-i)īt, sīc pec-to-re tō-tō
 ū-ri-tu(r, et) ste-ri-lem spē-ran-dō nūt-ri(t a)mō-rem.
-Spec-ta(t i)(nōr)nā-tōs col-lō pen-dē-re ca-pil-lōs,
+Spec-ta(t i)(n ōr)nā-tōs col-lō pen-dē-re ca-pil-lōs,
 et "Quid, sī cō-man-tu(r?" a)it; //  vi-de(t ig)ne mi-can-tēs
-sī-de-ri-bus si-mi-lēs o-cu-lōs; // vi-de(t ōs)cu-la, quae nōn
+sī-de-ri-bus si-mi-lēs o-cu-lōs; // vi-de(t ōs)cu-la, // quae nōn
 est vī-dis-se sa-tis; // lau-dat di-gi-tōs-que ma-nūs-que
 brac-chi-a-(que et) nū-dōs me-di-ā plūs par-te la-cer-tōs;
 sī qua la-tent, // me-li-ō-ra pu-tat. // Fu-gi(t ō)ci-o(r au)ra
 il-la le-vī ne-(que a)(d haec) re-vo-can-tis ver-ba re-sis-tit;
 "Nym-pha, pre-cor, Pē-nē-i, ma-nē! // Nōn īn-se-quo(r hos)tis;
 nym-pha, ma-nē! // Sīc ag-na lu-pum, // sīc cer-va le-ō-nem,
-sīc aqui-lam pen-nā fu-gi-unt tre-pi-dan-te co-lum-bae,
+sīc a-qui-lam pen-nā fu-gi-unt tre-pi-dan-te co-lum-bae,
 hos-tēs quae-que su-ōs; // a-mo(r est) mi-hi cau-sa se-quen-dī.
-Mē mi-se-rum — nē prō-na ca-dās, // in-dig-na-ve lae-dī
+Mē mi-se-rum— // nē prō-na ca-dās, // in-dig-na-ve lae-dī
 crū-ra no-tent sen-tēs, // et sim ti-bi cau-sa do-lō-ris!
-As-pe-ra, // quā pro-pe-rās, // lo-ca sunt mo-de-rā-tius, ōrō,
+As-pe-ra, // quā pro-pe-rās, // lo-ca sunt mo-de-rā-ti-u(s, ō)rō,
 cur-re fu-gam(que i)(nhi)bē; // mo-de-rā-ti-u(s īn)se-qua(r ip)se.
 Cui pla-ce-ās, in-quī-re ta-men; // nōn in-co-la mon-tis,
 nōn e-go sum pā-stor, // nōn hīc ar-men-ta gre-gēs-que
