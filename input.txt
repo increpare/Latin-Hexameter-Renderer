@@ -3,7 +3,7 @@ Prī-mu(s a)mor Phoe-bī // Daph-nē Pē-nē-i-a, // quem nōn >
 for(s ig)nā-ra de-dit, // sed sae-va Cu-pī-di-ni(s ī)ra; 
 Dē-li-u(s hunc,) // nū-per vic-tō ser-pen-te su-per-bus, >
 vī-de-ra(t // ad)duc-tō flec-ten-tem cor-nu-a ner-vō; 
-"Quid"-que "ti-bī, // las-cī-ve pu-er, // cum for-ti-bu(s ar)mīs?" >
+"Quid"-que "ti-bī, // las-cī-ve pu-er, cum for-ti-bu(s ar)mīs?" >
 dīx-e-ra(t; // "Is)ta de-cent u-me-rōs ges-tā-mi-na nos-trōs, >
 quī da-re cer-ta fe-rae, // da-re vul-ne-ra pos-su-mu(s hos)ti, 
 quī mo-do, // pes-ti-fe-rō // tot iū-ge-ra ven-tre pre-men-tem,  >
@@ -30,15 +30,15 @@ im-pa-ti-ēns ex-pers-que vi-rī, // ne-mo-(ra ā)vi-a lūs-trat,
 nec, qui(d Hy)mēn, // qui(d A)mor, // quid sint cō-nū-bi-a, // cū-rat.
 Sae-pe pa-ter dīx-it, // "Ge-ne-rum mi-hi, fī-li-a, dē-bēs";
 sae-pe pa-ter dī-xit, "Dē-bēs mi-hi, nā-ta, ne-pō-tēs."
-Il-la, ve-lut crī-men tae-dās ex-ō-sa iu-gā-lēs,
+Il-la, // ve-lut crī-men tae-dās ex-ō-sa iu-gā-lēs,
 pul-chra ve-rē-cun-dō suf-fun-di-tu(r ō)ra ru-bō-re,
 in-que pa-tris blan-dīs hae-rēns cer-vī-ce la-cer-tīs,
 "Dā mi-hi per-pe-tu-ā, // ge-ni-tor cā-ris-si-me," // dīx-it.
 "vir-gi-ni-tā-te fru-ī; // de-di(t hoc) pa-te(r an)te Di-ā-nae."
 Il-le qui-(dem ob)se-qui-tur; // sed tē de-co(r is)te, quo(d op)tās,
 es-se ve-tat, vō-tō-que tu-ō tu-a fōr-ma re-pug-nat.
-Phoe-bu(s a)mat vī-sae-que cu-put cō-nū-bi-a Daph-nēs,
-quod-que cu-pit, spē-rat, su-a(que il)(lum ō)rā-cu-la fal-lunt.
+Phoe-bu(s a)mat // vī-sae-que cu-pit // cō-nū-bi-a Daph-nēs,
+quod-que cu-pit, // spē-rat, // su-a(que il)(lum ō)rā-cu-la fal-lunt.
 Ut-que le-vēs sti-pu-lae dēmp-tī(s a)do-len-tu(r a)ris-tīs,
 ut fa-ci-bus sae-pē(s ar)dent, // quās for-te vi-ā-tor
 vel ni-mi(s ad)-mō-vit ve(l i)am sub lū-ce re-lī-quit,
@@ -51,7 +51,7 @@ est vī-dis-se sa-tis; // lau-dat di-gi-tōs-que ma-nūs-que
 brac-chi-a-(que et) nū-dōs me-di-ā plūs par-te la-cer-tōs;
 sī qua la-tent, // me-li-ō-ra pu-tat. // Fu-gi(t ō)ci-o(r au)ra
 il-la le-vī ne-(que a)(d haec) re-vo-can-tis ver-ba re-sis-tit;
-"Nym-pha, pre-cor, Pē-nē-i, ma-nē! // Nōn īn-se-quo(r hos)tis;
+"Nym-pha, pre-cor, // Pē-nē-i, ma-nē! // Nōn īn-se-quo(r hos)tis;
 nym-pha, ma-nē! // Sīc ag-na lu-pum, // sīc cer-va le-ō-nem,
 sīc a-qui-lam pen-nā fu-gi-unt tre-pi-dan-te co-lum-bae,
 hos-tēs quae-que su-ōs; // a-mo(r est) mi-hi cau-sa se-quen-dī.
@@ -79,7 +79,7 @@ ob-vi-a-(que ad)ver-sās vib-rā-bant flā-mi-na ves-tēs,
 et le-vi(s im)pul-sōs ret-rō da-ba(t au)ra ca-pil-lōs
 auc-ta-que fōr-ma fu-(gā est). // Se(d e)nim nōn sus-ti-ne(t ul)trā
 per-de-re blan-di-ti-ās iu-ve-nis de-u(s, // ut)que mo-nē-bat
-ip-(se A-)mo(r, // ad)mis-sō se-qui-tur vē-stī-gi-a pas-sū.
+ip(se A)mo(r, // ad)mis-sō se-qui-tur vē-stī-gi-a pas-sū.
 Ut ca-ni(s in) va-cu-ō le-po-rem cum Gal-li-cu(s ar)vō
 vī-di(t, // e)(t hic) prae-dam pe-di-bus pe-ti(t, // il)le sa-lū-tem —
 al-te(r i)(n-hae)sū-rō si-mi-lis iam iam-que te-nē-re
@@ -87,7 +87,7 @@ spē-ra(t, // e)(t ex)ten-tō strin-git vē-stī-gi-a rō-strō;
 al-te(r i)(n am)bi-gu-(ō est) // an sit com-prēn-su(s, e)(t ip)sīs
 mor-si-bu(s ē)ri-pi-tur, // tan-gen-ti-a-(que ō)ra re-lin-quit —
 sīc de-u(s et) vir-(gō; // est) hic spē ce-le(r, // il)la ti-mō-re.
-Quī ta-me(n īn)se-qui-tur, // pen-nīs a-di-ū-tus Amō-ris,
+Quī ta-me(n īn)se-qui-tur, // pen-nīs a-di-ū-tu(s A)mō-ris,
 ō-ci-o(r est), // re-qui-em-que ne-gat, // ter-gō-que fu-gā-cis
 im-mi-ne(t, // et) crī-nem spar-sum cer-vī-ci-bu(s af)flat.
 Vī-ri-bu(s ab)sūmp-tīs, // ex-pal-lu-i(t il)la, // ci-tae-que
