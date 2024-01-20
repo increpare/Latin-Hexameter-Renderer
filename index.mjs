@@ -448,14 +448,22 @@ function syllablize(line) {
 const inputFilePath = 'input.txt';
 const lines = fs.readFileSync(inputFilePath, 'utf-8').split('\n');
 
-//pop off the first line and parse it as the starting line number
-let starting_line_number = parseInt(lines.shift());
+let current_line_number = 1;
 
+
+var line_number = 1;
 var syllablized_lines = [];
 // Syllablize each line
 for (let i = 0; i < lines.length; i++) {
     var line = lines[i];
     line = line.trim();
+
+    //check line is a number followed by a colon, set current_line_number
+    if (line.match(/^\d+:/)){        
+        line_number = parseInt(line.match(/^\d+/)[0]);
+        continue;
+    }
+
     //if line doesn't end with punctuation or >
     if (!punctuation.includes(line[line.length - 1]) && line[line.length - 1] !== ">") {
         //add " >"
@@ -463,16 +471,21 @@ for (let i = 0; i < lines.length; i++) {
     }
     var syllablized_line = syllablize(line);    
 
-    if (i>0){
-        var prev_line = syllablized_lines[i-1];
-        //if previous line ended with open syllable, make first syllable of this line open
-        if (prev_line[prev_line.length-1].runon_syllable){
-            syllablized_line[0].runon_syllable = true;
+    if (syllablized_lines.length>0){
+        var prev_line_number = syllablized_lines[syllablized_lines.length-1][0];
+        var prev_line = syllablized_lines[syllablized_lines.length-1][1];
+        //if line numbers consecutive
+        if (prev_line_number === line_number-1){
+            //if previous line ended with open syllable, make first syllable of this line open
+            if (prev_line[prev_line.length-1].runon_syllable){
+                syllablized_line[0].runon_syllable = true;
+            }
         }
     }
     // console.log(line);
     // console.log(syllablized_line);
-    syllablized_lines.push(syllablized_line);
+    syllablized_lines.push([line_number,syllablized_line,line]);
+    line_number++;
 }
 
 function GetTestResults(line){
@@ -687,8 +700,10 @@ svg {
 </style>
 </head><body>\n`;
 for (let i = 0; i < syllablized_lines.length; i++) {
-    var line_number = starting_line_number + i;
-    var line = lines[i];
+    var pair = syllablized_lines[i];
+    var line_number = pair[0];
+    var syllablized_line = pair[1];
+    var line = pair[2]
 
     // let filename = `svg/${i}.svg`;
     //escape line to make it safe for javascript inclusion
@@ -697,7 +712,6 @@ for (let i = 0; i < syllablized_lines.length; i++) {
     line = line.replace(/</g, '&lt;');
     line = line.replace(/>/g, '&gt;');
     
-    let syllablized_line = syllablized_lines[i];
     let svg = syllablized_line_to_svg(syllablized_line);
     // let filename = `svg/${i}.svg`;
     // fs.writeFileSync(filename, svg);

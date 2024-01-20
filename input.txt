@@ -1,4 +1,4 @@
-452
+452:
 Prī-mu(s a)mor Phoe-bī // Daph-nē Pē-nē-i-a, // quem nōn >
 for(s ig)nā-ra de-dit, // sed sae-va Cu-pī-di-ni(s ī)ra; 
 Dē-li-u(s hunc,) // nū-per vic-tō ser-pen-te su-per-bus, >
@@ -7,14 +7,14 @@ vī-de-ra(t // ad)duc-tō flec-ten-tem cor-nu-a ner-vō;
 dīx-e-ra(t; // "Is)ta de-cent u-me-rōs ges-tā-mi-na nos-trōs, >
 quī da-re cer-ta fe-rae, // da-re vul-ne-ra pos-su-mu(s hos)ti, 
 quī mo-do, // pes-ti-fe-rō // tot iū-ge-ra ven-tre pre-men-tem,  >
-strā-vi-mu(s // in)nu-me-rīs tu-mi-dum Pȳ-thō-na sa-git-tīs. 
-Tū // fa-ce // nes-ci-o quōs // es-tō con-ten-tu(s a)mō-rēs
+strā-vi-mu(s in)nu-me-rīs tu-mi-dum //  Pȳ-thō-na sa-git-tīs. 
+Tū // fa-ce // nes-ci-o quōs es-tō con-ten-tu(s a)mō-rēs
 ir-rī-tā-re tu-ā // nec lau-dēs as-se-re nos-trās."
 Fī-li-u(s huic) Ve-ne-ris, // "Fī-gat tu-u(s om)ni-a, Phoe-be,
 tē me-u(s ar)cu(s," // a)it, // "quan-tō-(que a)ni-mā-li-a cē-dunt
 cūnc-ta de-ō, // tan-tō mi-no(r est) tu-a glō-ri-a nos-trā." >
 dīx-i(t e)(t, // ē)lī-sō per-cus-sīs ā-e-re pen-nīs
-im-pi-ge(r um)brō-sā // Par-nā-sī cōn-sti-ti(t ar)ce,
+im-pi-ge(r // um)brō-sā Par-nā-sī cōn-sti-ti(t ar)ce,
 ē-que sa-git-ti-fe-rā // prōmp-sit du-o tēl-a pha-ret-rā
 dī-ver-sō(rum o)pe-rum. // Fu-ga(t hoc), // fa-ci(t il)lu(d a)mō-rem;
 quod fa-ci(t, // au)rā(tum est) // et cus-pi-de ful-ge(t a)cū-tā,
@@ -30,7 +30,7 @@ im-pa-ti-ēns ex-pers-que vi-rī, // ne-mo-(ra ā)vi-a lūs-trat,
 nec, qui(d Hy)mēn, // qui(d A)mor, // quid sint cō-nū-bi-a, // cū-rat.
 Sae-pe pa-ter dīx-it, // "Ge-ne-rum mi-hi, fī-li-a, dē-bēs";
 sae-pe pa-ter dī-xit, "Dē-bēs mi-hi, nā-ta, ne-pō-tēs."
-Il-la, // ve-lut crī-men tae-dās ex-ō-sa iu-gā-lēs,
+Il-la, // ve-lut crī-men // tae-dās ex-ō-sa iu-gā-lēs,
 pul-chra ve-rē-cun-dō suf-fun-di-tu(r ō)ra ru-bō-re,
 in-que pa-tris blan-dīs hae-rēns cer-vī-ce la-cer-tīs,
 "Dā mi-hi per-pe-tu-ā, // ge-ni-tor cā-ris-si-me," // dīx-it.
@@ -93,6 +93,7 @@ im-mi-ne(t, // et) crī-nem spar-sum cer-vī-ci-bu(s af)flat.
 Vī-ri-bu(s ab)sūmp-tīs, // ex-pal-lu-i(t il)la, // ci-tae-que
 vic-ta la-bō-re fu-gae, // spec-tans Pē-nē-i-da(s un)dās,
 "Fer, pa-te(r," // in)qui(t, // "o)pem! sī flū-mi-na nū-me(n ha)bē-tis,
+547:
 Quā ni-mi-um pla-cu-ī, // mū-tan-dō per-de fi-gū-ram!"
 Vix pre-ce fī-nī-tā, // tor-por gra-vi(s oc)cu-pa(t ar)tūs;
 mol-li-a cin-gun-tur te-nu-ī prae-cor-di-a lib-rō,
@@ -101,7 +102,16 @@ pēs mo-do tam vē-lōx pig-rīs rā-dī-ci-bu(s hae)ret,
 ō-ra ca-cū-me(n ha)bet; // re-ma-net ni-to(r ū)nu(s i)(n il)lā.
 Hanc quo-que Phoe-bu(s a)mat, // po-si-tā-(que in) stī-pi-te dex-trā
 sen-ti(t a)(d-hūc) tre-pi-dā-re no-vō sub cor-ti-ce pec-tus,
-ut-que me(um in)tōn-sīs ca-pu(t est) iu-ve-nā-le ca-pil-līs,
-tū quo-que per-pe-tu-ōs sem-per ge-re fron-di(s ho)nō-rēs!"
+com-plex-us-que su-īs rā-mōs ut mem-bra la-cer-tīs
+ōs-cu-la dat lig-nō; re-fu-git ta-me(n ōs)cu-la lig-num.
+Cui de-u(s "At), quo-ni-am con-iunx me-a nōn po-te(s es)se,
+ar-bo(r e)ris cer-tē," dīx-it 'me-a! Sem-pe(r ha)-bē-bunt
+tē co-ma, tē ci-tha-rae, tē nos-trae, lau-re, pha-ret-rae.
+Tū du-ci-bus La-ti-īs a-de-ris, cum lae-ta Tri-um-phum
+vōx ca-ne(t et) vī-sent lon-gās Ca-pi-tō-li-a pom-pās.
+Pos-ti-bu(s Au)-gus-tīs // e-a-dem fī-dis-si-ma cus-tōs >
+an-te fo-rēs stā-bis, // me-di-am-que tu-ē-be-re quer-cum,
+ut-que me(um in)tōn-sīs ca-pu(t est) // iu-ve-nā-le ca-pil-līs,
+tū // quo-que per-pe-tu-ōs // sem-per ge-re fron-di(s ho)nō-rēs!"
 Fī-ni-e-rat Pae-ān; // fac-tīs mo-do lau-re-a rā-mīs
 ad-nu-i(t, // ut)que ca-put vī-(sa est) a-gi-tās-se ca-cū-men.
